@@ -5,6 +5,9 @@ from django.conf.urls.defaults import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
+    (r'^questions/$', 'qandabear.views.index'),
+    (r'^questions/(\d+)/$', 'qandabear.views.question'),
+    (r'^questions/(\d+)/answers/(\d+)/edit/$', 'qandabear.views.edit_answer'),
     # Examples:
     # url(r'^$', 'mysite.views.home', name='home'),
     # url(r'^mysite/', include('mysite.foo.urls')),
