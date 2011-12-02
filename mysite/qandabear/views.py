@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response
 from qandabear.models import Question
 
@@ -8,7 +8,11 @@ def index(request):
     return render_to_response('qandabear/index.html', context)
     
 def question(request, question_id):
-    return HttpResponse("You're looking at question %s." % (question_id,))
+    try:
+        q = Question.objects.get(id=question_id)
+    except:
+        raise Http404
+    return render_to_response('qandabear/detail.html', {'question':  q})
     
 def edit_answer(request, question_id, answer_id):
     return HttpResponse("You're looking at the edit page for answer %s." % (answer_id,))

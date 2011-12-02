@@ -1,0 +1,7 @@
+<h1>{{ question.text }}</h1>
+
+<ul>
+{% for answer in question.answer_set.all %}
+    <li>{{ answer.text }} -- <em>Answered at {{ answer.pub_date }} -- {{ answer.votes }} votes</em></li>
+{% endfor %}
+</ul>
