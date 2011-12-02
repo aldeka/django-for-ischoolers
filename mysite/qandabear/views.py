@@ -1,7 +1,11 @@
 from django.http import HttpResponse
+from django.shortcuts import render_to_response
+from qandabear.models import Question
 
 def index(request):
-    return HttpResponse("Hello, world! You're on the questions index page!!!")
+    latest_qs = Question.objects.all().order_by('-pub_date')[:5]
+    context = {'latest_qs': latest_qs}
+    return render_to_response('qandabear/index.html', context)
     
 def question(request, question_id):
     return HttpResponse("You're looking at question %s." % (question_id,))
